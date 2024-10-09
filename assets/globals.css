@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "YsabeauOffice";
+  src: url(/font/YsabeauOffice-Medium.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "YsabeauOffice";
+  src: url(/font/YsabeauOffice-MediumItalic.ttf);
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "YsabeauOffice";
+  src: url(/font/YsabeauOffice-Bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "YsabeauOffice";
+  src: url(/font/YsabeauOffice-BoldItalic.ttf);
+  font-weight: bold;
+  font-style: italic;
+}
+
+:root {
+  --link-color: hsl(201, 75%, 30%);
+  --link-hover-color: hsl(0, 75%, 40%);
+  --link-input-hover-color: hsla(201, 75%, 30%, 0.75);
+  --text-color: #000000;
+  --background-color: #ffffff;
+  --masonry-gap: 30px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "YsabeauOffice";
+  margin: 0;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+a {
+  text-decoration: none;
+  color: var(--link-color);
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  -webkit-transition-duration: .22s;
+  transition-duration: .22s;
+}
+
+.container {
+  padding: 0.5em 0.5em 0;
+  box-sizing: border-box;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 667px) {
+  .container {
+    padding: 1em 1em 0;
+  }
+}
+
+.masonry {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: calc(var(--masonry-gap) * -1);
+  width: auto;
+}
+
+.masonry__item {
+  padding-left: var(--masonry-gap);
+  background-clip: padding-box;
+}
+
+@media (hover: hover) {
+  a:hover {
+    color: var(--link-hover-color);
+    -webkit-transition: none;
+    transition: none;
+  }
+}
