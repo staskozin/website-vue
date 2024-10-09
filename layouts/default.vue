@@ -24,5 +24,6 @@ useHead({
 <template>
   <div class="container">
     <slot />
+    <Footer />
   </div>
 </template>
