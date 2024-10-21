@@ -1,5 +1,5 @@
 <template>
-  <Header title="Фронтенд-разработчик" />
+  <PageHeader title="Фронтенд-разработчик" />
   <div class="resume">
     <h2 id="skills">Ключевые навыки</h2>
     <ul class="skills">

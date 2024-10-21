@@ -1,5 +1,5 @@
 <template>
-  <Header title="Веб-разработчик" />
+  <PageHeader title="Веб-разработчик" />
   <ProjectList />
 </template>
 
