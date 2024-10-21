@@ -1,5 +1,5 @@
 <template>
-  <masonry-wall :items="items" :column-width="296" :gap="30" :min-columns="1" :max-columns="3" :ssr-columns="10">
+  <masonry-wall :items="items" :column-width="296" :gap="30" :min-columns="1" :max-columns="3">
     <template #default="{ item }">
       <Project :text="item.text" :href="item.href">
         <ScrollableImage :src="item.src" :width="item.width" :height="item.height"
