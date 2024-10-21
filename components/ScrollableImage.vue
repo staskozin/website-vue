@@ -1,20 +1,8 @@
-<style scoped>
-.perspective {
-  position: relative;
-  transition: transform 0.1s, box-shadow 0.2s;
-  backface-visibility: hidden;
-  z-index: 1;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 6px, rgba(0, 0, 0, 0.23) 0px 2px 6px;
-}
-
-.rounded {
-  border-radius: .67em;
-}
-
-.image {
-  image-rendering: smooth;
-}
-</style>
+<template>
+  <div ref="wrap">
+    <div ref="image" :class="className" :style="style"></div>
+  </div>
+</template>
 
 <script setup lang="ts">
 import type { CSSProperties } from 'vue';
@@ -35,7 +23,7 @@ if (props.perspective)
 if (props.rounded)
   className += "rounded "
 
-let style: CSSProperties = {
+const style: CSSProperties = {
   backgroundImage: `url(${props.src})`,
   aspectRatio: props.width / props.height
 }
@@ -106,8 +94,20 @@ onMounted(() => {
 })
 </script>
 
-<template>
-  <div ref="wrap">
-    <div ref="image" :class="className" :style="style"></div>
-  </div>
-</template>
+<style scoped>
+.perspective {
+  position: relative;
+  transition: transform 0.1s, box-shadow 0.2s;
+  backface-visibility: hidden;
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 6px, rgba(0, 0, 0, 0.23) 0px 2px 6px;
+}
+
+.rounded {
+  border-radius: .67em;
+}
+
+.image {
+  image-rendering: smooth;
+}
+</style>

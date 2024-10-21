@@ -1,3 +1,15 @@
+<template>
+  <masonry-wall :items="items" :column-width="296" :gap="30" :min-columns="1" :max-columns="3" :ssr-columns="10">
+    <template #default="{ item }">
+      <Project :text="item.text" :href="item.href">
+        <ScrollableImage :src="item.src" :width="item.width" :height="item.height"
+          :number-of-images="item.numberOfImages" :per-row="item.perRow" :perspective="item.perspective"
+          :rounded="item.rounded" />
+      </Project>
+    </template>
+  </masonry-wall>
+</template>
+
 <script setup lang="ts">
 type Item = {
   href: string
@@ -100,15 +112,3 @@ const items: Item[] = [
   }
 ]
 </script>
-
-<template>
-  <masonry-wall :items="items" :column-width="296" :gap="30" :min-columns="1" :max-columns="3" :ssr-columns="10">
-    <template #default="{ item }">
-      <Project :text="item.text" :href="item.href">
-        <ScrollableImage :src="item.src" :width="item.width" :height="item.height"
-          :number-of-images="item.numberOfImages" :per-row="item.perRow" :perspective="item.perspective"
-          :rounded="item.rounded" />
-      </Project>
-    </template>
-  </masonry-wall>
-</template>

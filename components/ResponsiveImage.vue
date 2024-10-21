@@ -1,3 +1,11 @@
+<template>
+  <div class="wrap">
+    <slot>
+      Добавьте картинку
+    </slot>
+  </div>
+</template>
+
 <style scoped>
 .wrap {
   width: 100%;
@@ -11,11 +19,3 @@
   height: unset !important;
 }
 </style>
-
-<template>
-  <div class="wrap">
-    <slot>
-      Добавьте картинку
-    </slot>
-  </div>
-</template>

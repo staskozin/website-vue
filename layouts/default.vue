@@ -1,3 +1,10 @@
+<template>
+  <div class="container">
+    <slot />
+    <Footer />
+  </div>
+</template>
+
 <script setup>
 import '~/assets/globals.css'
 
@@ -20,10 +27,3 @@ useHead({
   ]
 })
 </script>
-
-<template>
-  <div class="container">
-    <slot />
-    <Footer />
-  </div>
-</template>

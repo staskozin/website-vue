@@ -1,64 +1,3 @@
-<style scoped>
-.resume {
-  max-width: 59ch;
-  line-height: 1.4;
-}
-
-.resume h2 {
-  font-weight: normal;
-  margin: 1.1em 0 -0.25em;
-}
-
-.resume p {
-  margin: 1em 0;
-}
-
-.resume ul {
-  list-style-type: none;
-  padding-left: 1.2em;
-}
-
-.resume>ul {
-  padding: 0;
-}
-
-.resume li {
-  margin: 0.3em 0;
-}
-
-.resume ul li::before {
-  content: '—';
-  color: #bcbcbc;
-  margin-right: 0.3em;
-}
-
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8em;
-  margin-top: 0.8em;
-}
-
-.skills li {
-  display: inline-block;
-  background: linear-gradient(to top, #deecf6, #e8f6ff);
-  margin: 0;
-  padding: 0.1em 0.6em 0.25em;
-  border-radius: 0.3em;
-}
-
-.skills li::before,
-.contacts li::before {
-  content: none !important;
-}
-</style>
-
-<script setup>
-useHead({
-  title: 'Резюме Станислава Козина, веб-разработчика'
-})
-</script>
-
 <template>
   <Header title="Фронтенд-разработчик" />
   <div class="resume">
@@ -114,3 +53,64 @@ useHead({
     <p>Мои сайты хорошо работают во&nbsp;всех браузерах, кроме совсем древних, типа IE11.</p>
   </div>
 </template>
+
+<script setup>
+useHead({
+  title: 'Резюме Станислава Козина, веб-разработчика'
+})
+</script>
+
+<style scoped>
+.resume {
+  max-width: 59ch;
+  line-height: 1.4;
+}
+
+.resume h2 {
+  font-weight: normal;
+  margin: 1.1em 0 -0.25em;
+}
+
+.resume p {
+  margin: 1em 0;
+}
+
+.resume ul {
+  list-style-type: none;
+  padding-left: 1.2em;
+}
+
+.resume>ul {
+  padding: 0;
+}
+
+.resume li {
+  margin: 0.3em 0;
+}
+
+.resume ul li::before {
+  content: '—';
+  color: #bcbcbc;
+  margin-right: 0.3em;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8em;
+  margin-top: 0.8em;
+}
+
+.skills li {
+  display: inline-block;
+  background: linear-gradient(to top, #deecf6, #e8f6ff);
+  margin: 0;
+  padding: 0.1em 0.6em 0.25em;
+  border-radius: 0.3em;
+}
+
+.skills li::before,
+.contacts li::before {
+  content: none !important;
+}
+</style>
