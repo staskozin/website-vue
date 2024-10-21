@@ -1,7 +1,6 @@
 <style scoped>
 .project {
   display: block;
-  margin-bottom: var(--masonry-gap);
   width: 100%;
 }
 
@@ -26,6 +25,6 @@ const props = defineProps<{
     <ResponsiveImage>
       <slot />
     </ResponsiveImage>
-    <span className={s.text}>{{ props.text }}</span>
+    <span class="text">{{ props.text }}</span>
   </a>
 </template>

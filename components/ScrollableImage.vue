@@ -1,5 +1,6 @@
 <style scoped>
 .perspective {
+  position: relative;
   transition: transform 0.1s, box-shadow 0.2s;
   backface-visibility: hidden;
   z-index: 1;

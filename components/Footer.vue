@@ -1,6 +1,6 @@
 <style scoped>
 .footer {
-  margin: 3em 0 2em;
+  margin: 4.5em 0 2em;
   font-size: 0.75em;
 }
 

@@ -7,5 +7,5 @@ useHead({
 
 <template>
   <Header title="Веб-разработчик" />
-  <p>Тут будут проекты</p>
+  <ProjectList />
 </template>
