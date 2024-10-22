@@ -2,7 +2,7 @@
   <masonry-wall :items="items" :column-width="296" :gap="30" :min-columns="1" :max-columns="3">
     <template #default="{ item }">
       <ProjectItem :text="item.text" :href="item.href">
-        <ScrollableImage :src="item.src" :width="item.width" :height="item.height"
+        <ImageScrollable :src="item.src" :width="item.width" :height="item.height"
           :number-of-images="item.numberOfImages" :per-row="item.perRow" :perspective="item.perspective"
           :rounded="item.rounded" />
       </ProjectItem>

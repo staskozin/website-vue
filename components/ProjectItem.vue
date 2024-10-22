@@ -1,8 +1,8 @@
 <template>
   <a class="project" :href="props.href">
-    <ResponsiveImage>
+    <ImageResponsive>
       <slot />
-    </ResponsiveImage>
+    </ImageResponsive>
     <span class="text">{{ props.text }}</span>
   </a>
 </template>
