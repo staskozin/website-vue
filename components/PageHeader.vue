@@ -1,11 +1,30 @@
 <template>
   <header class="header">
-    <div v-if="route.path === '/'" class="name">
-      <NuxtImg class="photo" src="/img/stas.png" alt="Фото Стасяна" width="80" height="80" />
+    <div
+      v-if="route.path === '/'"
+      class="name"
+    >
+      <NuxtImg
+        class="photo"
+        src="/img/stas.png"
+        alt="Фото Стасяна"
+        width="80"
+        height="80"
+      />
       <span>Станислав Козин</span>
     </div>
-    <NuxtLink v-else class="name" to="/">
-      <NuxtImg class="photo" src="/img/stas.png" alt="Фото Стасяна" width="80" height="80" />
+    <NuxtLink
+      v-else
+      class="name"
+      to="/"
+    >
+      <NuxtImg
+        class="photo"
+        src="/img/stas.png"
+        alt="Фото Стасяна"
+        width="80"
+        height="80"
+      />
       <span>Станислав Козин</span>
     </NuxtLink>
 

@@ -1,5 +1,8 @@
 <template>
-  <a class="project" :href="props.href">
+  <a
+    class="project"
+    :href="props.href"
+  >
     <ImageResponsive>
       <slot />
     </ImageResponsive>

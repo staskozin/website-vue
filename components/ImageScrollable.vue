@@ -1,6 +1,10 @@
 <template>
   <div ref="wrap">
-    <div ref="image" :class="className" :style="style"></div>
+    <div
+      ref="image"
+      :class="className"
+      :style="style"
+    ></div>
   </div>
 </template>
 
