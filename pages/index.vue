@@ -3,9 +3,14 @@
   <ProjectList />
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
   title: 'Станислав Козин. Веб-разработчик',
-  description: 'Сайт-портфолио фронтенд-разработчика'
+  meta: [
+    {
+      name: 'description',
+      content: 'Сайт-портфолио фронтенд-разработчика'
+    }
+  ]
 })
 </script>

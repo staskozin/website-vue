@@ -54,7 +54,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
   title: 'Резюме Станислава Козина, веб-разработчика'
 })
