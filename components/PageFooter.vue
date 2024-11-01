@@ -1,26 +1,9 @@
 <template>
   <footer class="footer">
     <span>Станислав Козин, 2016–н.в.</span>
-    <ul class="contacts">
-      <li v-if="!route.fullPath.includes('/cv')">
-        <NuxtLink to="/cv">Резюме</NuxtLink>
-      </li>
-      <li>
-        <a href="https://github.com/staskozin">Гитхаб</a>
-      </li>
-      <li>
-        <a href="https://t.me/staskozin">Телеграм</a>
-      </li>
-      <li>
-        <a href="mailto:stas@staskozin.ru">stas@staskozin.ru</a>
-      </li>
-    </ul>
+    <MyContacts />
   </footer>
 </template>
-
-<script setup lang="ts">
-const route = useRoute()
-</script>
 
 <style scoped>
 .footer {
@@ -31,14 +14,5 @@ const route = useRoute()
 .footer>span {
   margin-bottom: 0.5em;
   display: block;
-}
-
-.contacts {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em 1em;
 }
 </style>

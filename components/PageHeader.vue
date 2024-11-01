@@ -32,23 +32,8 @@
       {{ props.title }}
     </h1>
 
-    <ul class="contacts">
-      <li v-if="props.subtitle">{{ props.subtitle }}</li>
-      <template v-else>
-        <li v-if="!route.fullPath.includes('/cv')">
-          <NuxtLink to="/cv">Резюме</NuxtLink>
-        </li>
-        <li>
-          <a href="https://github.com/staskozin">Гитхаб</a>
-        </li>
-        <li>
-          <a href="https://t.me/staskozin">Телеграм</a>
-        </li>
-        <li>
-          <a href="mailto:stas@staskozin.ru">stas@staskozin.ru</a>
-        </li>
-      </template>
-    </ul>
+    <p v-if="props.subtitle">{{ props.subtitle }}</p>
+    <MyContacts v-else />
   </header>
 </template>
 
@@ -82,15 +67,6 @@ const props = defineProps<{
   font-weight: normal;
 }
 
-.contacts {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  display: flex;
-  gap: 12px 24px;
-  flex-wrap: wrap;
-}
-
 @media screen and (min-width: 667px) {
   .header {
     margin-bottom: 1.666666em;
@@ -104,15 +80,6 @@ const props = defineProps<{
   .title {
     font-size: 48px;
     margin: 2px 0 20px;
-  }
-
-  .contacts {
-    gap: 0;
-  }
-
-  .contacts a {
-    padding: 0.8em;
-    margin-left: -0.8em;
   }
 }
 </style>
