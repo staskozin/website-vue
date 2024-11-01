@@ -19,7 +19,7 @@
 const route = useRoute()
 </script>
 
-<style>
+<style scoped>
 .contacts {
   padding: 0;
   margin: 0;
