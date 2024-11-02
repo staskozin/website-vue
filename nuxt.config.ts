@@ -3,7 +3,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   typescript: {
-    typeCheck: true
+    typeCheck: true,
   },
   modules: ['@nuxt/image', '@pinia/nuxt'],
-})
+  alias: {
+    pinia: '/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',
+  },
+});
