@@ -6,8 +6,6 @@
 </template>
 
 <script setup lang="ts">
-const store = useRiceStore()
-
 useHead({
   title: 'Как варить рис. Интерактивный рецепт',
   meta: [
