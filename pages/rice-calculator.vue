@@ -3,6 +3,13 @@
     title="Как варить рис"
     subtitle="Интерактивный рецепт"
   />
+  <InputIntPositive
+    v-model="rice"
+    :defaultValue="450"
+    :maxValue="2000000"
+    textBefore="Кол-во риса"
+    textAfter="г"
+  />
 </template>
 
 <script setup lang="ts">
