@@ -43,33 +43,58 @@ useHead({
 })
 
 const rice = ref<number>(450)
-const ratio = ref<number>(1.15)
 const purpose = ref<Purpose>('sushi')
 const riceType = ref<RiceType>('round')
 const pot = ref<Pot>('pot')
-const ingredients = ref<Ingredients>({
-  water: 518,
-  vinegar: 50,
-  salt: 5,
-  sugar: 41
+
+watch(purpose, (newPurpose) => {
+  if (newPurpose === 'porridge' || newPurpose === 'sushi') {
+    riceType.value = 'round'
+    if (pot.value === 'pan') {
+      pot.value = 'pot'
+    }
+    riceTypeOptions.long.disabled = true
+    riceTypeOptions.parboiled.disabled = true
+  } else if (newPurpose === 'side') {
+    riceTypeOptions.long.disabled = false
+    riceTypeOptions.parboiled.disabled = false
+  }
 })
 
-const riceTypeOptions: Record<RiceType, { name: string, disabled: boolean }> = {
+const ratio = computed<number>(() => {
+  switch (riceType.value) {
+    case 'round':
+      return 1.15
+    case 'long':
+      return 1.25
+    case 'parboiled':
+      return 1.3
+  }
+})
+
+const water = computed<number>(() => Math.round(rice.value * ratio.value))
+
+const proportion = computed<number>(() => Math.abs(rice.value / 500))
+const sugar = computed<number>(() => Math.round(45 * proportion.value))
+const salt = computed<number>(() => Math.round(5 * proportion.value))
+const vinegar = computed<number>(() => Math.round(55 * proportion.value))
+
+const riceTypeOptions = reactive<Record<RiceType, { name: string, disabled: boolean }>>({
   'round': {
     name: 'Круглый',
     disabled: false
   },
   'long': {
     name: 'Длинный',
-    disabled: false
+    disabled: true
   },
   'parboiled': {
     name: 'Пропаренный',
-    disabled: false
+    disabled: true
   }
-}
+})
 
-const purposeOptions: Record<Purpose, { name: string, disabled: boolean }> = {
+const purposeOptions = reactive<Record<Purpose, { name: string, disabled: boolean }>>({
   'sushi': {
     name: 'Суши',
     disabled: false
@@ -82,9 +107,9 @@ const purposeOptions: Record<Purpose, { name: string, disabled: boolean }> = {
     name: 'Каша',
     disabled: true
   }
-}
+})
 
-const potOptions: Record<Pot, { name: string, disabled: boolean }> = {
+const potOptions = reactive<Record<Pot, { name: string, disabled: boolean }>>({
   'pot': {
     name: 'Кастрюля',
     disabled: false
@@ -97,15 +122,9 @@ const potOptions: Record<Pot, { name: string, disabled: boolean }> = {
     name: 'Сковорода',
     disabled: true
   }
-}
+})
 
 export type Purpose = 'sushi' | 'side' | 'porridge';
 export type RiceType = 'round' | 'long' | 'parboiled';
 export type Pot = 'pot' | 'multi' | 'pan';
-type Ingredients = {
-  water: number
-  vinegar: number
-  sugar: number
-  salt: number
-};
 </script>
