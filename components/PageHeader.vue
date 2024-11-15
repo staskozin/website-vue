@@ -32,7 +32,7 @@
       {{ props.title }}
     </h1>
 
-    <p v-if="props.subtitle">{{ props.subtitle }}</p>
+    <p v-if="props.subtitle" class="subtitle">{{ props.subtitle }}</p>
     <MyContacts v-else />
   </header>
 </template>
@@ -65,6 +65,10 @@ const props = defineProps<{
   font-size: 32px;
   margin: 10px 0 18px;
   font-weight: normal;
+}
+
+.subtitle {
+  margin: 0;
 }
 
 @media screen and (min-width: 667px) {
