@@ -34,6 +34,7 @@ const ingredientsRef = useTemplateRef<HTMLUListElement>('ingredientsRef')
 function copyIngredients() {
   navigator.clipboard.writeText(ingredientsRef.value!.innerText)
   copyNotificationRef.value!.classList.remove('play')
+  copyNotificationRef.value!.offsetWidth
   copyNotificationRef.value!.classList.add('play')
 }
 
