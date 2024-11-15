@@ -29,6 +29,15 @@
     v-model="pot"
     :options="potOptions"
   />
+
+  <RiceIngredients
+    :purpose="purpose"
+    :rice="rice"
+    :water="water"
+    :vinegar="vinegar"
+    :sugar="sugar"
+    :salt="salt"
+  />
 </template>
 
 <script setup lang="ts">
