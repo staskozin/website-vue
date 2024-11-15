@@ -80,7 +80,7 @@ type IngredientsProps = {
   position: absolute;
   font-size: 0.8em;
   font-weight: normal;
-  background-color: rgb(0 0 0 / 33%);
+  background-color: rgb(0 0 0 / 80%);
   color: white;
   border-radius: 4px;
   padding: 0 8px 4px;

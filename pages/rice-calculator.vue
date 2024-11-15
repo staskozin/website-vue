@@ -3,41 +3,43 @@
     title="Как варить рис"
     subtitle="Интерактивный рецепт"
   />
-
-  <BaseSwitcher
-    text="Для чего"
-    v-model="purpose"
-    :options="purposeOptions"
-  />
-
-  <InputIntPositive
-    v-model="rice"
-    :defaultValue="450"
-    :maxValue="2000000"
-    textBefore="Кол-во риса"
-    textAfter="г"
-  />
-
-  <BaseSwitcher
-    text="Вид риса"
-    v-model="riceType"
-    :options="riceTypeOptions"
-  />
-
-  <BaseSwitcher
-    text="Посуда"
-    v-model="pot"
-    :options="potOptions"
-  />
-
-  <RiceIngredients
-    :purpose="purpose"
-    :rice="rice"
-    :water="water"
-    :vinegar="vinegar"
-    :sugar="sugar"
-    :salt="salt"
-  />
+  <div class="container">
+    <form сlass="form">
+      <div class="wrap">
+        <BaseSwitcher
+          text="Для чего"
+          v-model="purpose"
+          :options="purposeOptions"
+        />
+        <InputIntPositive
+          v-model="rice"
+          :defaultValue="450"
+          :maxValue="2000000"
+          textBefore="Кол-во риса"
+          textAfter="г"
+          class="rice-input"
+        />
+        <BaseSwitcher
+          text="Вид риса"
+          v-model="riceType"
+          :options="riceTypeOptions"
+        />
+        <BaseSwitcher
+          text="Посуда"
+          v-model="pot"
+          :options="potOptions"
+        />
+        <RiceIngredients
+          :purpose="purpose"
+          :rice="rice"
+          :water="water"
+          :vinegar="vinegar"
+          :sugar="sugar"
+          :salt="salt"
+        />
+      </div>
+    </form>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -137,3 +139,43 @@ export type Purpose = 'sushi' | 'side' | 'porridge';
 export type RiceType = 'round' | 'long' | 'parboiled';
 export type Pot = 'pot' | 'multi' | 'pan';
 </script>
+
+<style scoped>
+.container {
+  display: grid;
+  grid-template-columns: 0.75fr 2fr;
+  gap: 31px 24px;
+}
+
+.container form {
+  font-size: 18px;
+}
+
+.wrap {
+  position: sticky;
+  top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rice-input {
+  margin-bottom: -0.5em;
+}
+
+@media screen and (max-width: 1023px) {
+  .container {
+    grid-template-columns: 0.66fr 1fr;
+  }
+}
+
+@media screen and (max-width: 676px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .container form {
+    order: -1;
+  }
+}
+</style>

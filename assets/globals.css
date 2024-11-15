@@ -56,7 +56,7 @@ a {
   transition-duration: .22s;
 }
 
-.container {
+.main-container {
   padding: 0.5em 0.5em 0;
   box-sizing: border-box;
   max-width: 1300px;
@@ -64,7 +64,7 @@ a {
 }
 
 @media screen and (min-width: 667px) {
-  .container {
+  .main-container {
     padding: 1em 1em 0;
   }
 }

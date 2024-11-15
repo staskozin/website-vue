@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap">
+  <div class="input-wrap">
     <span v-if="props.textBefore">{{ props.textBefore }}</span>
     <input
       v-model.number="model"
@@ -81,13 +81,13 @@ type BaseInputProps = {
 </script>
 
 <style scoped>
-.wrap {
+.input-wrap {
   display: flex;
   align-items: baseline;
   gap: 0.333333em;
 }
 
-.wrap>span:first-child {
+.input-wrap>span:first-child {
   font-weight: bold;
 }
 
