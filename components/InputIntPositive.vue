@@ -2,7 +2,7 @@
   <div class="wrap">
     <span v-if="props.textBefore">{{ props.textBefore }}</span>
     <input
-      v-model="model"
+      v-model.number="model"
       class="input"
       @keypress="filterKeys"
       @paste="parsePastedText"
@@ -53,10 +53,10 @@ function parsePastedText(e: ClipboardEvent) {
 function clampValue(e: Event) {
   const input = e.target as HTMLInputElement
   if (Number(input.value) > props.maxValue) {
-    model.value = props.maxValue;
+    model.value = props.maxValue
     input.value = props.maxValue.toString()
   } else if (input.value.startsWith('0')) {
-    model.value = +input.value;
+    model.value = +input.value
     input.value = (+input.value).toString()
     input.setSelectionRange(0, 0)
   }
