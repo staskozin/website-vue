@@ -108,7 +108,7 @@ const items: Item[] = [
     perRow: 4
   },
   {
-    href: 'https://2ch.hk',
+    href: 'https://3dphoto.staskozin.ru',
     text: 'Сайт фотостудии Превращение',
     src: '/img/project/3dphoto.jpg',
     width: 550,
