@@ -39,6 +39,10 @@
         />
       </div>
     </form>
+    <RiceRecipe
+      :water="water"
+      :purpose="purpose"
+    />
   </div>
 </template>
 
