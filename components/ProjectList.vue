@@ -39,6 +39,16 @@ type Item = {
 }
 const items: Item[] = [
   {
+    href: 'https://github.com/staskozin/photogen',
+    text: 'Генератор инфографики для\xa0маркетплейсов',
+    src: '/img/project/photogen.jpg',
+    width: 550,
+    height: 550,
+    numberOfImages: 6,
+    perRow: 3,
+    rounded: true
+  },
+  {
     href: '/rice-calculator',
     text: 'Как варить рис',
     src: '/img/project/rice.jpg',
