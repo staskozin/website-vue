@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CSSProperties } from 'vue';
+import type { CSSProperties } from 'vue'
 
 const props = defineProps<{
   src: string
@@ -20,6 +20,9 @@ const props = defineProps<{
   perspective?: boolean
   rounded?: boolean
 }>()
+
+const columns = props.perRow ?? props.numberOfImages
+const rows = Math.ceil(props.numberOfImages / columns)
 
 let className = "image "
 if (props.perspective)
@@ -34,67 +37,131 @@ const style: CSSProperties = {
 
 const wrap = useTemplateRef('wrap')
 const image = useTemplateRef('image')
+let cleanup: (() => void) | null = null
 
 
 onMounted(() => {
+  if (wrap.value === null || image.value === null) return
+
+  const wrapEl = wrap.value
+  const imageEl = image.value
+  const dpr = window.devicePixelRatio || 1
+
+  const snapToDevicePixel = (value: number) => Math.round(value * dpr) / dpr
+  const toAngle = (value: number) => Math.round(value * 100) / 100
+
+  let frameWidth = 0
+  let frameHeight = 0
+  let selectedImage = -1
+  let rafId = 0
+  let pendingX = 0
+  let pendingY = 0
+  let pendingRotationModifier = 10
+  let hasPendingMove = false
+
+  function readFrameSize() {
+    const rect = wrapEl.getBoundingClientRect()
+    frameWidth = snapToDevicePixel(rect.width)
+    frameHeight = snapToDevicePixel(rect.height)
+  }
+
+  function selectImage(selected: number) {
+    const clamped = Math.min(Math.max(selected, 0), props.numberOfImages - 1)
+    if (clamped === selectedImage) return
+    selectedImage = clamped
+
+    const col = clamped % columns
+    const row = Math.floor(clamped / columns)
+    const x = -snapToDevicePixel(col * frameWidth)
+    const y = -snapToDevicePixel(row * frameHeight)
+    imageEl.style.backgroundPosition = `${x}px ${y}px`
+  }
+
   function updateBackgroundSize() {
-    if (image.value === null) return
-    if (props.perRow === undefined)
-      image.value!.style.backgroundSize = `${wrap.value!.clientWidth * props.numberOfImages}px ${wrap.value!.clientHeight}px`
-    else
-      image.value!.style.backgroundSize = `${wrap.value!.clientWidth * props.perRow}px ${wrap.value!.clientHeight * Math.ceil(props.numberOfImages / props.perRow)}px`
+    readFrameSize()
+    imageEl.style.backgroundSize = `${snapToDevicePixel(frameWidth * columns)}px ${snapToDevicePixel(frameHeight * rows)}px`
+    selectImage(selectedImage < 0 ? 0 : selectedImage)
   }
-  const img = new window.Image()
-  img.onload = updateBackgroundSize
-  img.src = props.src
-  window.addEventListener('resize', updateBackgroundSize)
-  screen.orientation.addEventListener("change", updateBackgroundSize)
 
-  function handleMove(clientX: number, clientY: number, rotationModifier: number) {
-    const n = wrap.value!.getBoundingClientRect()
-    const xVal = clientX - n.x
+  function applyMove() {
+    rafId = 0
+    if (!hasPendingMove) return
+
+    hasPendingMove = false
+    const xVal = Math.min(Math.max(pendingX, 0), frameWidth)
+    const yVal = Math.min(Math.max(pendingY, 0), frameHeight)
+
     if (props.perspective) {
-      const yVal = clientY - n.y
-      const yRotation = rotationModifier * ((xVal - image.value!.clientWidth / 2) / image.value!.clientWidth)
-      const xRotation = -rotationModifier * ((yVal - image.value!.clientHeight / 2) / image.value!.clientHeight)
-      const styles = 'perspective(' + image.value!.clientWidth + 'px) rotateX(' + xRotation + 'deg) rotateY(' + yRotation + 'deg) scale(1.02)'
-      requestAnimationFrame(() => {
-        image.value!.style.transform = styles
-        selectImage(xVal)
-      })
-    } else {
-      requestAnimationFrame(() => {
-        selectImage(xVal)
-      })
+      const yRotation = toAngle(pendingRotationModifier * ((xVal - frameWidth / 2) / frameWidth))
+      const xRotation = toAngle(-pendingRotationModifier * ((yVal - frameHeight / 2) / frameHeight))
+      imageEl.style.transform = `translateZ(0) perspective(${frameWidth}px) rotateX(${xRotation}deg) rotateY(${yRotation}deg) scale(1.02)`
     }
+
+    const zoneWidth = frameWidth / props.numberOfImages || 1
+    const nextSelected = Math.trunc(xVal / zoneWidth)
+    selectImage(nextSelected)
   }
 
-  function selectImage(xVal: number) {
-    let selected = Math.trunc(xVal / (wrap.value!.clientWidth / props.numberOfImages))
-    selected = Math.min(Math.max(selected, 0), props.numberOfImages - 1) // clamp
-    if (props.perRow === undefined)
-      image.value!.style.backgroundPositionX = `${selected / (props.numberOfImages - 1) * 100}%`
-    else
-      image.value!.style.backgroundPosition = `${(selected % props.perRow) / (props.perRow - 1) * 100}% ${Math.floor(selected / props.perRow) / (Math.ceil(props.numberOfImages / props.perRow) - 1) * 100}%`
+  function scheduleMove(clientX: number, clientY: number, rotationModifier: number) {
+    const rect = wrapEl.getBoundingClientRect()
+    pendingX = clientX - rect.left
+    pendingY = clientY - rect.top
+    pendingRotationModifier = rotationModifier
+    hasPendingMove = true
+
+    if (rafId !== 0) return
+    rafId = window.requestAnimationFrame(applyMove)
   }
 
   function resetPerspective() {
-    image.value!.style.transform = 'perspective(' + image.value!.clientWidth + 'px) scale(1) rotateX(0) rotateY(0)'
-    image.value!.style.boxShadow = 'rgba(0, 0, 0, 0.16) 0px 2px 6px, rgba(0, 0, 0, 0.23) 0px 2px 6px'
+    imageEl.style.transform = `translateZ(0) perspective(${frameWidth}px) scale(1) rotateX(0) rotateY(0)`
+    imageEl.style.boxShadow = 'rgba(0, 0, 0, 0.16) 0px 2px 6px, rgba(0, 0, 0, 0.23) 0px 2px 6px'
   }
 
   function setShadow() {
-    image.value!.style.boxShadow = 'rgba(50, 50, 93, 0.3) 0px 13px 27px -5px, rgba(0, 0, 0, 0.35) 0px 8px 16px -8px'
+    imageEl.style.boxShadow = 'rgba(50, 50, 93, 0.3) 0px 13px 27px -5px, rgba(0, 0, 0, 0.35) 0px 8px 16px -8px'
   }
 
-  wrap.value!.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY, 10))
-  wrap.value!.addEventListener('touchmove', (e) => handleMove(e.changedTouches[0].clientX, e.changedTouches[0].clientY, 7))
+  const handleMouseMove = (e: MouseEvent) => scheduleMove(e.clientX, e.clientY, 10)
+  const handleTouchMove = (e: TouchEvent) => scheduleMove(e.changedTouches[0].clientX, e.changedTouches[0].clientY, 7)
+
+  const img = new window.Image()
+  img.onload = updateBackgroundSize
+  img.src = props.src
+  updateBackgroundSize()
+
+  window.addEventListener('resize', updateBackgroundSize)
+  screen.orientation?.addEventListener('change', updateBackgroundSize)
+  wrapEl.addEventListener('mousemove', handleMouseMove)
+  wrapEl.addEventListener('touchmove', handleTouchMove)
+
   if (props.perspective) {
-    wrap.value!.addEventListener('mouseout', resetPerspective)
-    wrap.value!.addEventListener('touchend', resetPerspective)
-    wrap.value!.addEventListener('touchstart', setShadow)
-    wrap.value!.addEventListener('mouseover', setShadow)
+    wrapEl.addEventListener('mouseout', resetPerspective)
+    wrapEl.addEventListener('touchend', resetPerspective)
+    wrapEl.addEventListener('touchstart', setShadow)
+    wrapEl.addEventListener('mouseover', setShadow)
   }
+
+  cleanup = () => {
+    window.removeEventListener('resize', updateBackgroundSize)
+    screen.orientation?.removeEventListener('change', updateBackgroundSize)
+    wrapEl.removeEventListener('mousemove', handleMouseMove)
+    wrapEl.removeEventListener('touchmove', handleTouchMove)
+
+    if (props.perspective) {
+      wrapEl.removeEventListener('mouseout', resetPerspective)
+      wrapEl.removeEventListener('touchend', resetPerspective)
+      wrapEl.removeEventListener('touchstart', setShadow)
+      wrapEl.removeEventListener('mouseover', setShadow)
+    }
+
+    if (rafId !== 0)
+      window.cancelAnimationFrame(rafId)
+  }
+})
+
+onUnmounted(() => {
+  cleanup?.()
 })
 </script>
 
@@ -113,5 +180,9 @@ onMounted(() => {
 
 .image {
   image-rendering: smooth;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  transform: translateZ(0);
+  will-change: background-position, transform;
 }
 </style>
