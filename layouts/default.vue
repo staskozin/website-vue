@@ -8,6 +8,8 @@
 <script setup lang="ts">
 import '~/assets/globals.css'
 
+useTheme()
+
 useHead({
   link: [
     {

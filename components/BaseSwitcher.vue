@@ -68,26 +68,26 @@ type optionState = {
   cursor: pointer;
   display: block;
   padding: calc(0.277777em - 2px) calc(0.5em - 2px) calc(0.5em - 2px);
-  border: 2px solid #89a8b8;
+  border: 2px solid var(--control-border-color);
   border-radius: 6px;
 }
 
 .button input:checked+span {
-  background-color: #135d86;
-  border-color: #135d86;
-  color: #ffffff;
+  background-color: var(--control-selected-bg);
+  border-color: var(--control-selected-border);
+  color: var(--control-selected-text);
 }
 
 .button input:disabled+span {
-  color: #bbbbbb;
-  background-color: #fbfbfb;
-  border-color: #dddddd;
+  color: var(--control-disabled-text);
+  background-color: var(--control-disabled-bg);
+  border-color: var(--control-disabled-border);
 }
 
 .button input:focus-visible+span {
   outline-width: 2px;
   outline-style: solid;
-  outline-color: #1f73e3;
+  outline-color: var(--focus-color);
 }
 
 @media (hover: hover) {
@@ -101,7 +101,7 @@ type optionState = {
   }
 
   .button span:hover {
-    background-color: #ecf1f4;
+    background-color: var(--control-hover-bg);
     -webkit-transition: none;
     transition: none;
   }

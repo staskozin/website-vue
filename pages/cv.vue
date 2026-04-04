@@ -102,7 +102,7 @@ useHead({
 
 .resume ul li::before {
   content: '—';
-  color: #bcbcbc;
+  color: var(--muted-symbol-color);
   margin-right: 0.3em;
 }
 
@@ -115,7 +115,7 @@ useHead({
 
 .skills li {
   display: inline-block;
-  background: linear-gradient(to top, #deecf6, #e8f6ff);
+  background: linear-gradient(to top, var(--skills-gradient-from), var(--skills-gradient-to));
   margin: 0;
   padding: 0.1em 0.6em 0.25em;
   border-radius: 0.3em;

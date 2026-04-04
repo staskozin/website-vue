@@ -102,8 +102,10 @@ type BaseInputProps = {
   appearance: textfield;
   font-family: 'YsabeauOffice';
   font-size: inherit;
+  color: var(--text-color);
+  background-color: var(--background-color);
   text-align: right;
-  border: 2px solid #89a8b8;
+  border: 2px solid var(--control-border-color);
   border-radius: 6px;
   padding: 0.333333em 0.5em 0.444444em;
   width: 7ch;
@@ -115,9 +117,15 @@ type BaseInputProps = {
   transition-duration: .22s;
 }
 
+.input:focus-visible {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: var(--focus-color);
+}
+
 @media (hover: hover) {
   .input:hover {
-    border-color: hsl(200, 25%, 78%);
+    border-color: var(--control-border-hover-color);
     -webkit-transition: none;
     transition: none;
   }

@@ -68,6 +68,7 @@ type IngredientsProps = {
   background-image: url(/img/ui/copy.svg);
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  filter: var(--copy-icon-filter);
   margin-top: 2px;
   cursor: pointer;
 }
@@ -80,8 +81,8 @@ type IngredientsProps = {
   position: absolute;
   font-size: 0.8em;
   font-weight: normal;
-  background-color: rgb(0 0 0 / 80%);
-  color: white;
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-text);
   border-radius: 4px;
   padding: 0 8px 4px;
   top: -13px;
