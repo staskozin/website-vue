@@ -5,7 +5,7 @@
     aria-labelledby="analytics-consent-title"
   >
     <p id="analytics-consent-title">
-      Сайт использует cookie Яндекс Метрики для статистики посещаемости страниц. Подробнее — в
+      Сайт использует cookie Яндекс Метрики для статистики посещаемости страниц. Подробнее&nbsp;&mdash; в
       <NuxtLink to="/consent">согласии</NuxtLink>
       и
       <NuxtLink to="/personal-data">политике</NuxtLink>.
@@ -18,7 +18,11 @@
       >
         {{ isSubmitting ? 'Сохраняю…' : 'Согласен' }}
       </button>
-      <p v-if="errorMessage" class="error" role="alert">
+      <p
+        v-if="errorMessage"
+        class="error"
+        role="alert"
+      >
         {{ errorMessage }}
       </p>
     </div>
@@ -206,6 +210,7 @@ button:disabled {
 @media screen and (max-width: 520px) {
   .consent-banner {
     padding: 14px;
+    width: calc(100vw - 24px);
   }
 
   .actions {
