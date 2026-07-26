@@ -2,11 +2,13 @@
   <div class="main-container">
     <slot />
     <PageFooter />
+    <AnalyticsConsent />
   </div>
 </template>
 
 <script setup lang="ts">
 import '~/assets/globals.css'
+import AnalyticsConsent from '../components/AnalyticsConsent.vue'
 
 useHead({
   link: [

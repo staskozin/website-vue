@@ -1,6 +1,6 @@
 <template>
   <PageHeader title="Фронтенд-разработчик" />
-  <div class="resume">
+  <PageDocument>
     <h2 id="skills">Ключевые навыки</h2>
     <ul class="skills">
       <li>HTML</li>
@@ -63,7 +63,7 @@
         картин</a>, на&nbsp;котором, собственно, можно выбрать и&nbsp;заказать картину. Некоторые проекты, потерявшие
       актуальность, заархивированы на&nbsp;моём сайте.</p>
     <p>Мои сайты хорошо работают во&nbsp;всех браузерах, кроме совсем древних, типа IE11.</p>
-  </div>
+  </PageDocument>
 </template>
 
 <script setup lang="ts">
@@ -73,39 +73,6 @@ useHead({
 </script>
 
 <style scoped>
-.resume {
-  max-width: 59ch;
-  line-height: 1.4;
-}
-
-.resume h2 {
-  font-weight: normal;
-  margin: 1.1em 0 -0.25em;
-}
-
-.resume p {
-  margin: 1em 0;
-}
-
-.resume ul {
-  list-style-type: none;
-  padding-left: 1.2em;
-}
-
-.resume>ul {
-  padding: 0;
-}
-
-.resume li {
-  margin: 0.3em 0;
-}
-
-.resume ul li::before {
-  content: '—';
-  color: #bcbcbc;
-  margin-right: 0.3em;
-}
-
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -121,8 +88,7 @@ useHead({
   border-radius: 0.3em;
 }
 
-.skills li::before,
-.contacts li::before {
+.skills li::before {
   content: none !important;
 }
 </style>

@@ -28,16 +28,17 @@
       <span>Станислав Козин</span>
     </NuxtLink>
 
-    <h1 class="title">
-      {{ props.title }}
-    </h1>
+    <h1 class="title" v-html="props.title"></h1>
 
-    <p v-if="props.subtitle" class="subtitle">{{ props.subtitle }}</p>
-    <MyContacts v-else />
+    <p v-if="props.subtitle" class="subtitle" v-html="props.subtitle"></p>
+
+    <SiteLinks v-else :items="CONTACT_LINKS" />
   </header>
 </template>
 
 <script setup lang="ts">
+import { CONTACT_LINKS } from '../shared/site-links'
+
 const route = useRoute()
 const props = defineProps<{
   title: string

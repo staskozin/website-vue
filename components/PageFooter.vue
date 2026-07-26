@@ -1,9 +1,13 @@
 <template>
   <footer class="footer">
     <span>Станислав Козин, 2016–н.в.</span>
-    <MyContacts />
+    <SiteLinks :items="FOOTER_LINKS" />
   </footer>
 </template>
+
+<script setup lang="ts">
+import { FOOTER_LINKS } from '../shared/site-links'
+</script>
 
 <style scoped>
 .footer {
@@ -12,7 +16,8 @@
 }
 
 .footer>span {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.7em;
   display: block;
 }
+
 </style>
